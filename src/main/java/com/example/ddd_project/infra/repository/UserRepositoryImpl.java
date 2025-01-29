@@ -1,4 +1,4 @@
-package com.example.ddd_project.infra;
+package com.example.ddd_project.infra.repository;
 
 import java.util.Optional;
 

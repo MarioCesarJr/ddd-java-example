@@ -1,4 +1,4 @@
-package com.example.ddd_project.presentation.rest;
+package com.example.ddd_project.api.dto;
 
 public class AddressDTO {
     private String street;

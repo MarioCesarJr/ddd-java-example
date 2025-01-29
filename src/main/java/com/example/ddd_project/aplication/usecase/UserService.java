@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import com.example.ddd_project.domain.repository.UserRepository;
 import com.example.ddd_project.domain.model.User;
 import com.example.ddd_project.domain.model.Address;
-import com.example.ddd_project.presentation.rest.*;
+import com.example.ddd_project.api.dto.*;
 
 @Service
 public class UserService {
