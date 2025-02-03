@@ -1,14 +1,14 @@
-package com.example.ddd_project.api.dto;
+package com.example.ddd_project.infra.web.dto;
 
-public class AddressDTO {
+public class AddressRequestDTO {
     private String street;
     private String city;
     private String zipCode;
 
-    public AddressDTO() {
+    public AddressRequestDTO() {
     }
 
-    public AddressDTO(String street, String city, String zipCode) {
+    public AddressRequestDTO(String street, String city, String zipCode) {
         this.street = street;
         this.city = city;
         this.zipCode = zipCode;

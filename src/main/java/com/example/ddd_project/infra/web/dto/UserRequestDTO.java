@@ -1,15 +1,15 @@
-package com.example.ddd_project.api.dto;
+package com.example.ddd_project.infra.web.dto;
 
-public class UserDTO {
+public class UserRequestDTO {
     private Long id;
     private String name;
     private String email;
-    private AddressDTO address;
+    private AddressRequestDTO address;
 
-    public UserDTO() {
+    public UserRequestDTO() {
     }
 
-    public UserDTO(Long id, String name, String email, AddressDTO address) {
+    public UserRequestDTO(Long id, String name, String email, AddressRequestDTO address) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -40,11 +40,11 @@ public class UserDTO {
         this.email = email;
     }
 
-    public AddressDTO getAddress() {
+    public AddressRequestDTO getAddress() {
         return address;
     }
 
-    public void setAddress(AddressDTO address) {
+    public void setAddress(AddressRequestDTO address) {
         this.address = address;
     }
 }
