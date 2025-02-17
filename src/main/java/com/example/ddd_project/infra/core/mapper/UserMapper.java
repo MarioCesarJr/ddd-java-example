@@ -1,13 +1,12 @@
 package com.example.ddd_project.infra.core.mapper;
 
-import com.example.ddd_project.infra.web.dto.AddressRequestDTO;
-import com.example.ddd_project.infra.web.dto.UserRequestDTO;
-import com.example.ddd_project.infra.web.dto.UserResponseDTO;
-
 import org.springframework.stereotype.Component;
 
 import com.example.ddd_project.domain.model.Address;
 import com.example.ddd_project.domain.model.User;
+import com.example.ddd_project.web.dto.AddressRequestDTO;
+import com.example.ddd_project.web.dto.UserRequestDTO;
+import com.example.ddd_project.web.dto.UserResponseDTO;
 
 @Component
 public class UserMapper {

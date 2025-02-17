@@ -1,4 +1,4 @@
-package com.example.ddd_project.api.controller;
+package com.example.ddd_project.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ddd_project.infra.web.dto.UserRequestDTO;
-import com.example.ddd_project.infra.web.dto.UserResponseDTO;
 import com.example.ddd_project.aplication.usecase.user.CreateUserUseCase;
 import com.example.ddd_project.aplication.usecase.user.DeleteUserUseCase;
 import com.example.ddd_project.aplication.usecase.user.GetUserUseCase;
 
 import com.example.ddd_project.infra.core.mapper.UserMapper;
+import com.example.ddd_project.web.dto.UserRequestDTO;
+import com.example.ddd_project.web.dto.UserResponseDTO;
 
 @RestController
 @RequestMapping("/users")

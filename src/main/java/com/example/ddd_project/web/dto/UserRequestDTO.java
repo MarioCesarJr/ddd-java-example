@@ -1,15 +1,15 @@
-package com.example.ddd_project.infra.web.dto;
+package com.example.ddd_project.web.dto;
 
-public class UserResponseDTO {
+public class UserRequestDTO {
     private Long id;
     private String name;
     private String email;
     private AddressRequestDTO address;
 
-    public UserResponseDTO() {
+    public UserRequestDTO() {
     }
 
-    public UserResponseDTO(Long id, String name, String email, AddressRequestDTO address) {
+    public UserRequestDTO(Long id, String name, String email, AddressRequestDTO address) {
         this.id = id;
         this.name = name;
         this.email = email;
