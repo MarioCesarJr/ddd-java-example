@@ -1,6 +1,7 @@
 package com.example.ddd_project.web.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ddd_project.aplication.usecase.user.CreateUserUseCase;
 import com.example.ddd_project.aplication.usecase.user.DeleteUserUseCase;
 import com.example.ddd_project.aplication.usecase.user.GetUserUseCase;
-
+import com.example.ddd_project.domain.exception.DomainException;
 import com.example.ddd_project.infra.core.mapper.UserMapper;
 import com.example.ddd_project.web.dto.UserRequestDTO;
 import com.example.ddd_project.web.dto.UserResponseDTO;
@@ -34,11 +35,15 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping
-    public ResponseEntity<HttpStatus> store(@RequestBody UserRequestDTO userDTO) {
-        this.createUserUseCase.execute(userMapper.requestDTOToDomainObject(userDTO));
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> store(@RequestBody UserRequestDTO userDTO) {
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        try {
+            this.createUserUseCase.execute(userMapper.requestDTOToDomainObject(userDTO));
+            return new ResponseEntity<>(HttpStatus.CREATED);   
+        } catch (DomainException e) {
+            return new ResponseEntity<>(e.getNotification().getErrorResponse(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{id}")
