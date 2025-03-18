@@ -1,39 +1,35 @@
 package com.example.ddd_project.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "app_user")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     private String name;
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+    private List<Address> addresses = new ArrayList<>();;
 
     public User() {
     }
     
-    public User(Long id, String name, String email, Address address) {
+    public User(Long id, String name, String email, List<Address> addresses) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.address = address;
+        this.addresses = addresses;
+    }
+
+    public User(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
+    public void addAddress(Address address) {
+        addresses.add(address);
     }
 
     public Long getId() {
@@ -48,8 +44,8 @@ public class User {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
     @Override

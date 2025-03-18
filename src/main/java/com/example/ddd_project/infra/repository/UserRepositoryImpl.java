@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ddd_project.domain.model.User;
 import com.example.ddd_project.domain.repository.UserRepository;
+import com.example.ddd_project.infra.core.mapper.UserMapper;
+import com.example.ddd_project.infra.entity.UserEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,31 +22,35 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findById(Long id) {
-        User user = entityManager.find(User.class, id);
-        return Optional.ofNullable(user);
+
+        UserEntity userEntity = entityManager.find(UserEntity.class, id);
+        return Optional.ofNullable(UserMapper.toDomain(userEntity));
     }
 
     @Transactional
     @Override
     public User save(User user) {
+
+        UserEntity userEntity = UserMapper.toEntity(user);
+
         if (user.getId() == null) {
-            entityManager.persist(user);
+            entityManager.persist(userEntity);
         } else {
-            entityManager.merge(user);
+            entityManager.merge(userEntity);
         }
-        
-        return user;
+
+        return UserMapper.toDomain(userEntity);
     }
 
     @Transactional
     @Override
     public void deleteById(Long id) {
-        User user = entityManager.find(User.class, id);
-
-        if (user == null) {
+        UserEntity userEntity = entityManager.find(UserEntity.class, id);
+       
+        if (userEntity == null) {
             throw new EntityNotFoundException("User not found id: " + id);
         }
         
-        entityManager.remove(user); 
+        entityManager.remove(userEntity); 
     }
 }

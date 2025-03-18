@@ -1,15 +1,17 @@
-package com.example.ddd_project.web.dto;
+package com.example.ddd_project.infra.http.dto;
+
+import java.util.List;
 
 public class UserResponseDTO {
     private Long id;
     private String name;
     private String email;
-    private AddressRequestDTO address;
+    private List<AddressResponseDTO> address;
 
     public UserResponseDTO() {
     }
 
-    public UserResponseDTO(Long id, String name, String email, AddressRequestDTO address) {
+    public UserResponseDTO(Long id, String name, String email, List<AddressResponseDTO> address) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -40,11 +42,11 @@ public class UserResponseDTO {
         this.email = email;
     }
 
-    public AddressRequestDTO getAddress() {
+    public List<AddressResponseDTO> getAddress() {
         return address;
     }
 
-    public void setAddress(AddressRequestDTO address) {
+    public void setAddress(List<AddressResponseDTO> address) {
         this.address = address;
     }
 }

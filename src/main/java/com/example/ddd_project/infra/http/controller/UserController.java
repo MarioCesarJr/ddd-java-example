@@ -1,4 +1,4 @@
-package com.example.ddd_project.web.controller;
+package com.example.ddd_project.infra.http.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,8 +16,8 @@ import com.example.ddd_project.aplication.usecase.user.DeleteUserUseCase;
 import com.example.ddd_project.aplication.usecase.user.GetUserUseCase;
 import com.example.ddd_project.domain.exception.DomainException;
 import com.example.ddd_project.infra.core.mapper.UserMapper;
-import com.example.ddd_project.web.dto.UserRequestDTO;
-import com.example.ddd_project.web.dto.UserResponseDTO;
+import com.example.ddd_project.infra.http.dto.UserRequestDTO;
+import com.example.ddd_project.infra.http.dto.UserResponseDTO;
 
 @RestController
 @RequestMapping("/users")
@@ -26,20 +26,18 @@ public class UserController {
     private final CreateUserUseCase createUserUseCase;
     private final DeleteUserUseCase deleteUserUseCase;
     private final GetUserUseCase getUserUseCase;
-    private final UserMapper userMapper;
 
-    public UserController(CreateUserUseCase createUserUseCase, DeleteUserUseCase deleteUserUseCase, GetUserUseCase getUserUseCase, UserMapper userMapper) {
+    public UserController(CreateUserUseCase createUserUseCase, DeleteUserUseCase deleteUserUseCase, GetUserUseCase getUserUseCase) {
         this.createUserUseCase = createUserUseCase;
         this.deleteUserUseCase = deleteUserUseCase;
         this.getUserUseCase = getUserUseCase;
-        this.userMapper = userMapper;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> store(@RequestBody UserRequestDTO userDTO) {
 
         try {
-            this.createUserUseCase.execute(userMapper.requestDTOToDomainObject(userDTO));
+            this.createUserUseCase.execute(UserMapper.requestDTOToDomainObject(userDTO));
             return new ResponseEntity<>(HttpStatus.CREATED);   
         } catch (DomainException e) {
             return new ResponseEntity<>(e.getNotification().getErrorResponse(), HttpStatus.BAD_REQUEST);
@@ -48,8 +46,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> show(@PathVariable Long id) {
-
-        return new ResponseEntity<>(userMapper.domainObjectToResponseDTO(
+        return new ResponseEntity<>(UserMapper.domainObjectToResponseDTO(
                 getUserUseCase.execute(id).get()), HttpStatus.OK);
     }
 

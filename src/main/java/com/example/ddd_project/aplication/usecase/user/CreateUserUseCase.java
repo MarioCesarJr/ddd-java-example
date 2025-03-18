@@ -7,7 +7,6 @@ import com.example.ddd_project.aplication.usecase.UseCase;
 
 import com.example.ddd_project.domain.model.User;
 import com.example.ddd_project.domain.exception.DomainException;
-import com.example.ddd_project.domain.model.Address;
 
 @Service
 public class CreateUserUseCase implements UseCase<User, User> {
@@ -39,11 +38,7 @@ public class CreateUserUseCase implements UseCase<User, User> {
                 null,
                 user.getName(),
                 user.getEmail(),
-                new Address(
-                        null,
-                        user.getAddress().getStreet(),
-                        user.getAddress().getCity(),
-                        user.getAddress().getZipCode()));
+                user.getAddresses());
 
         this.userRepository.save(user);
 
